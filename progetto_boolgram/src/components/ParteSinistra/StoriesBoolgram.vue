@@ -93,7 +93,7 @@ export default {
   }
 
   .story_sugg2 {
-    height: 120px;     
+    height: 80px;  
     background: linear-gradient(rgb(138, 216, 213), rgb(100, 134, 236));
   }
   

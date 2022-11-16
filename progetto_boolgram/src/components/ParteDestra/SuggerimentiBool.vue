@@ -98,6 +98,7 @@
       // background: green;
       border-bottom: 1px solid blue;
       border-top: 1px solid blue;
+      box-shadow: 1px 1px 1px blue;
 
       p {
         font-size: 13px;
@@ -113,6 +114,7 @@
           width: 50px;
           height: 50px;
           border-radius: 50%;
+          box-shadow: 2px 2px 2px blue;
         }
 
         img:hover {

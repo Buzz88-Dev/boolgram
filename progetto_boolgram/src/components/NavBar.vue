@@ -60,8 +60,8 @@ export default {
     input {
       border: 1px solid grey;
       padding: 5px;
-      background: linear-gradient(white,rgb(138, 216, 213));
-      box-shadow: 10px 10px 5px grey;
+      background: linear-gradient(white,rgb(159, 225, 222));
+      box-shadow: 5px 5px 5px black;
     }
   }
 

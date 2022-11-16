@@ -1,48 +1,51 @@
 <template>
     <div class="page_posts" v-if="reload">
-        <div v-for="(allPosts, i) in posts" :key="i" class="post">
-            <div class="profilo">
-                <div class="profilo_image">
-                  <img :src="allPosts.profile_picture">
-                </div>  
-                <p>{{allPosts.profile_fullname}} </p>
-            </div>
-
-            <div class="post_image">
-                <img :src="allPosts.post_image">
-            </div> 
-
-            <div class="text">
-              <p>Testo del Post: {{ allPosts.post_text }}</p>
-            </div>
-
-            <div class="text">
-                <div v-for="(allComments, index) in allPosts.comments" :key="index">
-                    <div v-if="index < 3">
-                        <!-- <p>Mittente: {{ allComments.username }}</p> -->
-                        <p>Commento: {{ allComments.text }}</p>
-                    </div>
-
-                    <div v-if="(index + 1) == allPosts.comments.length" class="parCommTot">
-                        <p>Commenti totali: {{ allPosts.comments.length }}</p>
-                    </div>
-                </div> 
-                
-              <button @click="otherMessage(i)">Visualizza altri commenti</button>
-
-              <div id="altriMessaggi" v-if="altriMessaggi">
-                  <div v-for="(allComments, index) in posts[i].comments" :key="index">
-                      <div v-if="index >= 3">
-                          <p>Testo: {{ allComments.text }}</p>
+          <div v-for="(allPosts, i) in posts" :key="i" class="post">
+                      <div class="profilo">
+                                <div class="profilo_image">
+                                  <img :src="allPosts.profile_picture">
+                                </div>  
+                                <p>{{allPosts.profile_fullname}} </p>
                       </div>
-                  </div>
 
-                  <!-- se decommentato, al click su Visualizza altri commenti mi fa vedere i commenti di tutti i post; e non i soli commenti del post richiamato  -->
-              </div>
+                      <div class="post_image">
+                                <img :src="allPosts.post_image">
+                      </div> 
+
+                      <div class="textCommento">
+                        <h3>{{ allPosts.post_text }}</h3>
+                      </div>
+
+                      <div class="text">
+                                <p>Commenti</p>
+                                <div class="overflowComment">
+                                    <div v-for="(allComments, index) in allPosts.comments" :key="index">
+                                        <div v-if="index < 3">
+                                              <h4>{{index + 1}}...   Nome: {{ allComments.username }}</h4>
+                                              <p class="par">{{ allComments.text }}</p>
+                                        </div>
+
+                                        <div v-if="((index + 1) == allPosts.comments.length) && index >= 3">
+                                            <h5>Altri Commenti: {{ allPosts.comments.length - 3 }}</h5>
+                                        </div>
+                                    </div> 
+
+                                    <button @click="otherMessage(i)">Visualizza altri commenti</button>
+
+                                    <div id="altriMessaggi" v-if="altriMessaggi">
+                                        <div v-for="(allComments, index) in posts[i].comments" :key="index">
+                                            <div v-if="index >= 3">
+                                                <h4>{{index + 1}}...   Nome: {{ allComments.username }}</h4>
+                                                <p class="par">{{ allComments.text }}</p>
+                                            </div>
+                                        </div>
+                                        <!-- se decommentato, al click su Visualizza altri commenti mi fa vedere i commenti di tutti i post; e non i soli commenti del post richiamato -->
+                                    </div>
+                                </div>
+                      </div>
           </div>
-
-        </div>
     </div> 
+
     <div v-else class="spinner">
         <img src="../../assets/spinner.gif" alt="">
     </div>
@@ -111,22 +114,21 @@
 <style scoped lang="scss">
   
   .page_posts {
-    width: 500px;   
+    width: 400px;   
     margin: 0 auto;
+    
 
     .post {
-      margin-top: 30px;
-      border: 1px solid grey;
-      // background: red;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      box-shadow: 5px 5px 5px black;
 
       .profilo {
         display: flex;
-        text-align: left;
         align-items: center;
-        flex-direction: row;
         justify-content: flex-start;
-        padding: 20px 40px;
-        // background: yellow;
+        padding: 20px 30px;
+        background: linear-gradient(white,rgb(138, 216, 213));
 
         .profilo_image {
           width: 50px;
@@ -137,23 +139,65 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            box-shadow: 2px 2px 2px blue;
           }
         }
       }
       .post_image {
         width: 100%;
+        height: 400px;
 
         img {
           width: 100%;
+          height: 400px;
         }
       }
 
-      .text {
+      .textCommento {
         padding: 20px;
+        text-align: center;
+        background: linear-gradient(white,rgb(138, 216, 213));
+      }
 
-        .parCommTot {
-          margin-top: 20px;
+      .text {
+        background: linear-gradient(white,rgb(172, 167, 167));
+
+        p {
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          padding: 10px;
+          font-size: 12px;
         }
+
+        .overflowComment {
+          height: 100px;
+          overflow-y: scroll;
+
+          h4 {
+            font-size: 15px;
+          }
+          
+          .par {
+            margin-bottom: 15px;
+            margin-left: 13px;
+            margin-top: -5px;
+            font-size: 12px;
+            color: rgb(118, 115, 115);
+          }
+
+          h5 {
+            color: rgb(110, 106, 106);
+            padding-left: 10px;
+          }
+
+          button {
+            margin-top: 5px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            background: linear-gradient(white,rgb(172, 167, 167));
+          }
+          
+        }
+
       }
     }
   }

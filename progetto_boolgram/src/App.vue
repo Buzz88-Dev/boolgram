@@ -67,7 +67,7 @@ export default {
     flex-direction: row;
 
     .left_block {
-      background: linear-gradient(rgb(100, 134, 236),rgb(3, 11, 167));
+      background: linear-gradient( rgb(100, 134, 236), blue);
       width: 80%;
 
       .scrollx {
