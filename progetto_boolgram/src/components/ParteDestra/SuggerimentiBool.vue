@@ -1,18 +1,21 @@
 <template>
-   <div class="story_sugg">
-      <div class="paragrafo">
-        <h4>Suggerimenti per te</h4>
-        <h4>Mostra tutti</h4>
-      </div>
-      <div class="suggerimenti">
-          <div v-for="(allStories) in stories" :key="allStories.index" class="container_sugg">
-            <div class="image">
-                <img :src="allStories.profile_picture">
-            </div>  
-            <p>{{allStories.profile_name}}</p>        
-          </div>
-    </div>    
+    <div class="story_sugg" v-if="reload">
+        <div class="paragrafo">
+            <h4>Suggerimenti per te</h4>
+            <h4>Mostra tutti</h4>
+        </div>
+        <div class="suggerimenti">
+            <div v-for="(allStories) in stories" :key="allStories.index" class="container_sugg">
+              <div class="image">
+                  <img :src="allStories.profile_picture">
+              </div>  
+              <p>{{allStories.profile_name}}</p>        
+            </div>
+      </div>    
    </div>
+    <div v-else class="spinner story_sugg2">
+        <img src="../../assets/spinner.gif" alt="">
+    </div>
 </template>
   
 <script>
@@ -25,11 +28,19 @@
         return {
           apiStories : "https://flynn.boolean.careers/exercises/api/boolgram/profiles",
           stories : [],
+          myTime : '',
+          reload : false,
         }
       },
 
       created(){
-        this.getStories()
+        // this.getStories();
+        // this.myTime = setInterval(this.getStories, 3000)
+        // // console.log(this.myTime);
+        // this.myTimeEnd = setTimeout(clearInterval(this.myTime), 4000);
+
+        this.myTime = setInterval(() => this.getStories(), 3000);
+        setTimeout(() => { clearInterval(this.myTime);}, 3100);
       },
 
       methods : {
@@ -37,6 +48,7 @@
           axios.get(this.apiStories)
           .then((result) => {
             this.stories = result.data;
+            this.reload = true;
             // console.log(this.stories);
           }).catch((error) => {
             console.log("Errore", error);
@@ -50,57 +62,80 @@
 <style scoped lang="scss">
   
   .story_sugg {
-    height: calc(100vh - 160px);     
+    height: calc(100vh - 230px);     
     overflow-y: scroll;
+    background: linear-gradient( rgb(100, 134, 236), rgb(64, 90, 238));
+    // background: red;
+      .paragrafo {
+      font-size: 13px;
+      display: flex;
+      text-align: center;
+      justify-content: space-between;
+      flex-direction: row;
+      margin: 30px 20px 10px 20px;
 
-    .paragrafo {
-    font-size: 10px;
-    display: flex;
-    text-align: center;
-    justify-content: space-between;
-    flex-direction: row;
-    margin: 10px 0px;
-    // background: orange;
+      h4:first-child  {
+        opacity: 0.5;
+      }
 
-    h4:first-child  {
-      margin-left: 15px;
+      h4:last-child:hover  {
+        color: blue;
+        cursor: pointer;
+        font-weight: bold;
+      }
     }
-
-    h4:last-child  {
-      margin-right: 40px;
-    }
-  }
   .suggerimenti {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: left;
-    margin: 20px;
     // background: orange;
 
     .container_sugg {
       display: flex;
-      margin: 20px 0px;
+      margin: 20px 20px;
       align-items: center;
       // background: green;
+      border-bottom: 1px solid blue;
+      border-top: 1px solid blue;
 
       p {
-        font-size: 10px;
+        font-size: 13px;
         margin-left: 10px;
       }
       .image {
       width: 50px;
       height: 50px;
+      margin: 5px 0;
+      // background: blue;
 
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+
+        img:hover {
+          cursor: pointer;
+        }
       }
     }
+  }
+  }
+  .spinner {
+    display: flex;
+    align-items: center;
+    
+    img {
+      width: 20%;
+      margin-left: 40%;
     }
   }
-  }
   
+  .story_sugg2 {
+    height: calc(100vh - 230px);     
+    overflow-y: scroll;
+    background: linear-gradient( rgb(100, 134, 236), rgb(64, 90, 238));
+  }
 </style>
   

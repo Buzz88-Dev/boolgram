@@ -3,11 +3,21 @@
     <div class="image">
       <img alt="Vue logo" src="../assets/logo.png">
     </div>
-    <input type="text" placeholder="Search...">
+
+    <div class="input">
+      <input type="text" placeholder="Search...">
+    </div>
+
     <div class="icone">
-      <font-awesome-icon icon="fa-solid fa-star" />
-      <i class="fas fa-ellipsis-v single_icon"></i>
-      <i class="fas fa-bell-slash"></i>
+      <div class="icona">
+        <i class="fas fa-star"></i>
+      </div>
+      <div>
+        <i class="fas fa-ellipsis-v single_icon"></i>
+      </div>
+      <div class="image2">
+        <img src="../assets/profile.jpg" alt="">
+      </div>
     </div>
   </div>
 </template>
@@ -22,27 +32,63 @@ export default {
 <style scoped lang="scss">
 
 .navbar {
-  color: white;
   height: 80px;
-  padding: 10px 100px;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
+  background: linear-gradient(white,rgb(138, 216, 213));
 
   .image {
-    height: 50px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+    // border: 1px solid black;
 
     img {
       height: 50px;
     }
   }
 
-  .icone {
+  .input {
+    height: 80px;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    color: black;
+    align-items: center;
+    // border: 1px solid black;
+
+    input {
+      border: 1px solid grey;
+      padding: 5px;
+      background: linear-gradient(white,rgb(138, 216, 213));
+      box-shadow: 10px 10px 5px grey;
+    }
+  }
+
+  .icone {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+    // border: 1px solid black;
+
+    .icona {
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+    .image2 {
+      height: 40px;
+      width: 40px;
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+      }
+    }
 
     .single_icon {
       margin: 0 20px;

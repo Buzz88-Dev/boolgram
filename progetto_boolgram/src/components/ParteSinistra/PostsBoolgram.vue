@@ -1,5 +1,5 @@
 <template>
-    <div class="page_posts">
+    <div class="page_posts" v-if="reload">
         <div v-for="(allPosts, i) in posts" :key="i" class="post">
             <div class="profilo">
                 <div class="profilo_image">
@@ -30,19 +30,22 @@
                 
               <button @click="otherMessage(i)">Visualizza altri commenti</button>
 
-              <div v-if="altriMessaggi" id="altriMessaggi">
-                  <!-- <div v-for="(allComments, index) in posts[i].comments" :key="index">
+              <div id="altriMessaggi" v-if="altriMessaggi">
+                  <div v-for="(allComments, index) in posts[i].comments" :key="index">
                       <div v-if="index >= 3">
                           <p>Testo: {{ allComments.text }}</p>
                       </div>
-                  </div> -->
+                  </div>
 
                   <!-- se decommentato, al click su Visualizza altri commenti mi fa vedere i commenti di tutti i post; e non i soli commenti del post richiamato  -->
               </div>
           </div>
 
-        </div>  
+        </div>
     </div> 
+    <div v-else class="spinner">
+        <img src="../../assets/spinner.gif" alt="">
+    </div>
 </template>
   
 <script>
@@ -58,11 +61,14 @@
         commenti: '',
         altriMessaggi: false,
         indexMessaggio: 0,
+        myTime : false,
+        reload : false,
       }
     },
 
     created(){
-      this.getPosts()
+      this.myTime = setInterval(() => this.getPosts(), 3000);
+      setTimeout(() => { clearInterval(this.myTime);}, 3100);
     },
 
     methods : {
@@ -70,6 +76,7 @@
         axios.get(this.apiPosts)
         .then((result) => {
           this.posts = result.data;
+          this.reload = true;
           console.log(this.posts);
           console.log(this.posts[0]);
         }).catch((error) => {
@@ -83,15 +90,15 @@
         // console.log(this.indexMessaggio);
         // console.log(this.posts[index].comments);
         // console.log(this.posts[index].comments[0].text);
-        let messaggi = document.getElementById('altriMessaggi');
-        let paragrafo = '';
+        // let messaggi = document.getElementById('altriMessaggi');
 
         for(let i = 0; i < this.posts[this.indexMessaggio].comments.length; i++){
-          //  console.log(this.posts[this.indexMessaggio].comments.length);
-          //  console.log(this.posts[this.indexMessaggio].comments[i].text);
-           paragrafo = document.createElement('p').innerHTML += this.posts[this.indexMessaggio].comments[i].text;
+          // console.log(this.posts[this.indexMessaggio].comments.length);
+          // console.log(this.posts[this.indexMessaggio].comments[i].text);
+           let paragrafo = document.createElement('p');
+           paragrafo.innerHTML = this.posts[this.indexMessaggio].comments[i].text;
            console.log(paragrafo);
-           messaggi.append(paragrafo);
+          // messaggi.innerHTML += paragrafo.innerHTML;
 
            // alternativa per stampare gli altri commenti???
         }
@@ -104,7 +111,7 @@
 <style scoped lang="scss">
   
   .page_posts {
-    width: 500px;
+    width: 500px;   
     margin: 0 auto;
 
     .post {
@@ -149,6 +156,11 @@
         }
       }
     }
+  }
+
+  .spinner {
+    margin-top: 100px;
+    text-align: center;
   }
   
 </style>

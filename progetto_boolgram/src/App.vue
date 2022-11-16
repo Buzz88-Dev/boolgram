@@ -3,8 +3,10 @@
     <NavBar />
     <div class="principal_block">
       <div class="left_block">
-        <StoriesBoolgram />
-        <div class="scroll">
+        <div class="scrolly">
+          <StoriesBoolgram />
+        </div>
+        <div class="scrollx">
           <PostsBoolgram />
         </div>
       </div>
@@ -48,12 +50,13 @@ export default {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
 } 
 
 ::-webkit-scrollbar-thumb {
-  background: grey; 
+  background: blue; 
 }
+
 
 #app {
   width: 100%;
@@ -64,11 +67,11 @@ export default {
     flex-direction: row;
 
     .left_block {
+      background: linear-gradient(rgb(100, 134, 236),rgb(3, 11, 167));
       width: 80%;
 
-      .scroll {
+      .scrollx {
         height: calc(100vh - 160px);
-        // background-color: lightgreen;
         overflow-y: scroll;
       }
     }
