@@ -68,7 +68,7 @@ export default {
 
       .scroll {
         height: calc(100vh - 160px);
-        background-color: lightgreen;
+        // background-color: lightgreen;
         overflow-y: scroll;
       }
     }

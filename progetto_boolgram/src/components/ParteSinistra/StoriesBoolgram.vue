@@ -31,7 +31,7 @@ export default {
         axios.get(this.apiStories)
         .then((result) => {
           this.stories = result.data;
-          console.log(this.stories);
+          // console.log(this.stories);
         }).catch((error) => {
           console.log("Errore", error);
         })
@@ -49,12 +49,12 @@ export default {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    background: pink;
+    // background: pink;
     padding: 20px;
 
     .container_stories {
       margin: 0px 20px;
-      background: yellow;
+      // background: yellow;
 
       p {
         font-size: 10px;

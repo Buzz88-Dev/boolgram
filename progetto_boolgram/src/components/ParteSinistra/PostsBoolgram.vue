@@ -1,29 +1,46 @@
 <template>
     <div class="page_posts">
         <div v-for="(allPosts, i) in posts" :key="i" class="post">
-          <div class="profilo">
-            <div class="profilo_image">
-              <img :src="allPosts.profile_picture">
-            </div>  
-            <p>{{allPosts.profile_fullname}} </p>
+            <div class="profilo">
+                <div class="profilo_image">
+                  <img :src="allPosts.profile_picture">
+                </div>  
+                <p>{{allPosts.profile_fullname}} </p>
+            </div>
+
+            <div class="post_image">
+                <img :src="allPosts.post_image">
+            </div> 
+
+            <div class="text">
+              <p>Testo del Post: {{ allPosts.post_text }}</p>
+            </div>
+
+            <div class="text">
+                <div v-for="(allComments, index) in allPosts.comments" :key="index">
+                    <div v-if="index < 3">
+                        <!-- <p>Mittente: {{ allComments.username }}</p> -->
+                        <p>Commento: {{ allComments.text }}</p>
+                    </div>
+
+                    <div v-if="(index + 1) == allPosts.comments.length" class="parCommTot">
+                        <p>Commenti totali: {{ allPosts.comments.length }}</p>
+                    </div>
+                </div> 
+                
+              <button @click="otherMessage(i)">Visualizza altri commenti</button>
+
+              <div v-if="altriMessaggi" id="altriMessaggi">
+                  <!-- <div v-for="(allComments, index) in posts[i].comments" :key="index">
+                      <div v-if="index >= 3">
+                          <p>Testo: {{ allComments.text }}</p>
+                      </div>
+                  </div> -->
+
+                  <!-- se decommentato, al click su Visualizza altri commenti mi fa vedere i commenti di tutti i post; e non i soli commenti del post richiamato  -->
+              </div>
           </div>
 
-          <div class="post_image">
-              <img :src="allPosts.post_image">
-          </div> 
-          <div class="text">
-            <p>{{ allPosts.post_text }}</p>
-          </div>
-          <div class="text">
-            <p>Commenti:</p>
-            <div v-for="(allComments, index) in allPosts.comments" :key="index">
-              <div v-if="index < 3">
-                <!-- <p>Mittente: {{ allComments.username }}</p> -->
-                <p>Testo: {{ allComments.text }}</p>
-              </div>
-            </div>
-            <p>Commenti totali: {{ allPosts.comments.length }}</p>
-          </div>
         </div>  
     </div> 
 </template>
@@ -39,6 +56,8 @@
         apiPosts : "https://flynn.boolean.careers/exercises/api/boolgram/posts",
         posts : [],
         commenti: '',
+        altriMessaggi: false,
+        indexMessaggio: 0,
       }
     },
 
@@ -52,10 +71,31 @@
         .then((result) => {
           this.posts = result.data;
           console.log(this.posts);
+          console.log(this.posts[0]);
         }).catch((error) => {
           console.log("Errore", error);
         })
       },
+
+      otherMessage(index){
+        this.altriMessaggi = true;
+        this.indexMessaggio = index;
+        // console.log(this.indexMessaggio);
+        // console.log(this.posts[index].comments);
+        // console.log(this.posts[index].comments[0].text);
+        let messaggi = document.getElementById('altriMessaggi');
+        let paragrafo = '';
+
+        for(let i = 0; i < this.posts[this.indexMessaggio].comments.length; i++){
+          //  console.log(this.posts[this.indexMessaggio].comments.length);
+          //  console.log(this.posts[this.indexMessaggio].comments[i].text);
+           paragrafo = document.createElement('p').innerHTML += this.posts[this.indexMessaggio].comments[i].text;
+           console.log(paragrafo);
+           messaggi.append(paragrafo);
+
+           // alternativa per stampare gli altri commenti???
+        }
+      }
     }
   }
 </script>
@@ -69,7 +109,8 @@
 
     .post {
       margin-top: 30px;
-      background: red;
+      border: 1px solid grey;
+      // background: red;
 
       .profilo {
         display: flex;
@@ -78,7 +119,7 @@
         flex-direction: row;
         justify-content: flex-start;
         padding: 20px 40px;
-        background: yellow;
+        // background: yellow;
 
         .profilo_image {
           width: 50px;
@@ -102,6 +143,10 @@
 
       .text {
         padding: 20px;
+
+        .parCommTot {
+          margin-top: 20px;
+        }
       }
     }
   }

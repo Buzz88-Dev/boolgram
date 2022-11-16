@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        Footer
+        <h5>Footer</h5>
     </div>   
 </template>
   
@@ -15,7 +15,7 @@
   
   .footer {
     color: black;;
-    background: blue;
+    // background: blue;
   }
   
 </style>

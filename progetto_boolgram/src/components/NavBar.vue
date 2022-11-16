@@ -22,7 +22,6 @@ export default {
 <style scoped lang="scss">
 
 .navbar {
-  background: black;
   color: white;
   height: 80px;
   padding: 10px 100px;
@@ -33,7 +32,6 @@ export default {
 
   .image {
     height: 50px;
-    background: white;
 
     img {
       height: 50px;
@@ -44,6 +42,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    color: black;
 
     .single_icon {
       margin: 0 20px;

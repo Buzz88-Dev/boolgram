@@ -1,8 +1,8 @@
 <template>
    <div class="story_sugg">
       <div class="paragrafo">
-        <p>Suggerimenti per te</p>
-        <p>Mostra tutti</p>
+        <h4>Suggerimenti per te</h4>
+        <h4>Mostra tutti</h4>
       </div>
       <div class="suggerimenti">
           <div v-for="(allStories) in stories" :key="allStories.index" class="container_sugg">
@@ -37,7 +37,7 @@
           axios.get(this.apiStories)
           .then((result) => {
             this.stories = result.data;
-            console.log(this.stories);
+            // console.log(this.stories);
           }).catch((error) => {
             console.log("Errore", error);
           })
@@ -52,6 +52,7 @@
   .story_sugg {
     height: calc(100vh - 160px);     
     overflow-y: scroll;
+
     .paragrafo {
     font-size: 10px;
     display: flex;
@@ -59,7 +60,15 @@
     justify-content: space-between;
     flex-direction: row;
     margin: 10px 0px;
-    background: orange;
+    // background: orange;
+
+    h4:first-child  {
+      margin-left: 15px;
+    }
+
+    h4:last-child  {
+      margin-right: 40px;
+    }
   }
   .suggerimenti {
     display: flex;
@@ -67,13 +76,13 @@
     justify-content: flex-start;
     align-items: left;
     margin: 20px;
-    background: orange;
+    // background: orange;
 
     .container_sugg {
       display: flex;
       margin: 20px 0px;
       align-items: center;
-      background: green;
+      // background: green;
 
       p {
         font-size: 10px;

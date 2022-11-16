@@ -1,6 +1,6 @@
 <template>
     <div class="profili">
-        Profili
+        <h5>Profili</h5>
     </div>   
 </template>
   
@@ -15,7 +15,7 @@
   
   .profili {
     color: black;
-    background: green;
+    // background: green;
   }
   
 </style>
