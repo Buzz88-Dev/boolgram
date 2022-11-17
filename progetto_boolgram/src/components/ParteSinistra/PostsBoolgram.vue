@@ -25,8 +25,8 @@
                                               <p class="par">{{ allComments.text }}</p>
                                         </div>
 
-                                        <div v-if="((index + 1) == allPosts.comments.length) && index >= 3">
-                                            <h5>Altri Commenti: {{ allPosts.comments.length - 3 }}</h5>
+                                        <div v-if="((index + 1) == allPosts.comments.length)">
+                                            <h5>Commenti totali: {{ allPosts.comments.length }}</h5>
                                         </div>
                                     </div> 
 
@@ -90,9 +90,9 @@
       otherMessage(index){
         this.altriMessaggi = true;
         this.indexMessaggio = index;
-        // console.log(this.indexMessaggio);
-        // console.log(this.posts[index].comments);
-        // console.log(this.posts[index].comments[0].text);
+        console.log(this.indexMessaggio);
+        console.log(this.posts[index].comments);
+        console.log(this.posts[index].comments[0].text);
         // let messaggi = document.getElementById('altriMessaggi');
 
         for(let i = 0; i < this.posts[this.indexMessaggio].comments.length; i++){
@@ -173,12 +173,13 @@
           overflow-y: scroll;
 
           h4 {
+            margin-left: 10px;
             font-size: 15px;
           }
           
           .par {
             margin-bottom: 15px;
-            margin-left: 13px;
+            margin-left: 25px;
             margin-top: -5px;
             font-size: 12px;
             color: rgb(118, 115, 115);
@@ -190,9 +191,9 @@
           }
 
           button {
-            margin-top: 5px;
+            margin-top: 10px;
             margin-left: 10px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             background: linear-gradient(white,rgb(172, 167, 167));
           }
           
@@ -203,8 +204,14 @@
   }
 
   .spinner {
-    margin-top: 100px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    
+    img {
+      width: 70px; 
+      margin-left: 600px; 
+      margin-top: 230px;   
+    }
   }
   
 </style>
