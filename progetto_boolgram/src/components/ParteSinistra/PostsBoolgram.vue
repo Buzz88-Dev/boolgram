@@ -93,18 +93,6 @@
         console.log(this.indexMessaggio);
         console.log(this.posts[index].comments);
         console.log(this.posts[index].comments[0].text);
-        // let messaggi = document.getElementById('altriMessaggi');
-
-        for(let i = 0; i < this.posts[this.indexMessaggio].comments.length; i++){
-          // console.log(this.posts[this.indexMessaggio].comments.length);
-          // console.log(this.posts[this.indexMessaggio].comments[i].text);
-           let paragrafo = document.createElement('p');
-           paragrafo.innerHTML = this.posts[this.indexMessaggio].comments[i].text;
-           console.log(paragrafo);
-          // messaggi.innerHTML += paragrafo.innerHTML;
-
-           // alternativa per stampare gli altri commenti???
-        }
       }
     }
   }
