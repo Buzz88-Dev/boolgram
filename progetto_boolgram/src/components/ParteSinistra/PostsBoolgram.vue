@@ -39,7 +39,6 @@
                                                 <p class="par">{{ allComments.text }}</p>
                                             </div>
                                         </div>
-                                        <!-- se decommentato, al click su Visualizza altri commenti mi fa vedere i commenti di tutti i post; e non i soli commenti del post richiamato -->
                                     </div>
                                 </div>
                       </div>
